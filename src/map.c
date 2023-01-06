@@ -18,17 +18,47 @@ int map_read(t_game *map, char *file)
             break;
     }
     map->map_raw_data = map_raw;
-    printf("Map data:\n%s", map->map_raw_data);
     return 0;
 }
 
-int map_parse(t_game *map, char *map_raw)
+int map_get_size(t_game *map)
 {
+    char *map_raw;
+    map_raw = map->map_raw_data;
+    int i = 0;
+    int x = 0;
+    int x_high = 0;
+    int y = 0;
+    while (map_raw[i])
+    {
+        if (map_raw[i] == '\n')
+        {
+            if (x > x_high)
+                x_high = x;
+            y++;
+            x = 0;
+        }
+        else if (map_raw[i] == '1' || map_raw[i] == '0' || map_raw[i] == 'P' || map_raw[i] == 'C' || map_raw[i] == 'E')
+            x++;
+        else
+            return 1;
+        i++;
+    }
+    map->height = y;
+    map->width = x_high;
+    return 0;
+}
+
+int map_parse(t_game *map)
+{
+    map_get_size(map);
     return 0;
 }
 
 int map_controller(t_game *map, char **av)
 {
     if (map_read(map, av[1]) != 0)
+        return 1;
+    if (map_parse(map) != 0)
         return 1;
 }

@@ -13,8 +13,11 @@ typedef struct s_game
     void *win;
     int fd;
     char *map_raw_data;
+    int height;
+    int width;
 } t_game;
 
 int map_controller(t_game *map, char **av);
+int get_block(t_game *map, int x, int y);
 
 #endif

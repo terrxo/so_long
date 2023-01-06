@@ -1,7 +1,4 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -9,8 +6,24 @@
             "request": "launch",
             "name": "Debug",
             "program": "${workspaceFolder}/program.out",
-            "args": ["${workspaceFolder}/maps/map.ber"],
+            "args": [
+                "${workspaceFolder}/maps/map.ber"
+            ],
             "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "(lldb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/program.out",
+            "args": [
+                "${workspaceFolder}/maps/map.ber"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
         }
     ]
 }
