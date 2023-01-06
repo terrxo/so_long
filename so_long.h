@@ -15,9 +15,15 @@ typedef struct s_game
     char *map_raw_data;
     int height;
     int width;
+    void *floor;
+    void *wall;
+    void *player;
+    void *exit;
+    void *item;
 } t_game;
 
 int map_controller(t_game *map, char **av);
 int get_block(t_game *map, int x, int y);
+int graphics_cache_assets(t_game *cache);
 
 #endif
