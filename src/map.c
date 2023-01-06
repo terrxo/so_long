@@ -7,12 +7,15 @@ int map_read(t_game *map, char *file)
 
     if ((map->fd = open(file, O_RDONLY)) < 0)
         return 1;
+    map_raw = malloc(sizeof(char) * 1001);
     while (1)
     {
-        read_line = get_next_line(map->fd);
-        if (!read_line)
+        // read_line = get_next_line(map->fd);
+        // if (!read_line)
+        //     break;
+        // map_raw = ft_strjoin(map_raw, read_line);
+        if (read(map->fd, map_raw, 1000) == 0)
             break;
-        map_raw = ft_strjoin(map_raw, read_line);
     }
     map->map_raw_data = map_raw;
     printf("Map data:\n%s", map->map_raw_data);
