@@ -2,12 +2,14 @@
 
 int graphics_cache_assets(t_game *cache)
 {
+    int i;
+    int j;
     void *mlx = cache->mlx;
-    cache->floor = mlx_png_file_to_image(mlx, "../assets/Tile.png", 256, 256);
-    cache->wall = mlx_png_file_to_image(mlx, "../assets/Grass.png", 256, 256);
-    cache->exit = mlx_png_file_to_image(mlx, "../assets/Door.png", 256, 256);
-    cache->item = mlx_png_file_to_image(mlx, "../assets/Collectible_Tile.png", 256, 256);
-    cache->player = mlx_png_file_to_image(mlx, "../assets/Collectible_Tile.png", 256, 256);
+    cache->floor = mlx_xpm_file_to_image(mlx, "assets/Tile.xpm", &i, &j);
+    cache->wall = mlx_xpm_file_to_image(mlx, "assets/Grass.xpm", &i, &j);
+    cache->exit = mlx_xpm_file_to_image(mlx, "assets/Door.xpm", &i, &j);
+    cache->item = mlx_xpm_file_to_image(mlx, "assets/Collectible_Tile.xpm", &i, &j);
+    cache->player = mlx_xpm_file_to_image(mlx, "assets/Collectible_Tile.xpm", &i, &j);
 
     return 0;
 }

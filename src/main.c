@@ -3,7 +3,7 @@
 int init_mlxwindow(t_game *window)
 {
     window->mlx = mlx_init();
-    window->win = mlx_new_window(window->mlx, window->width * 64, window->height * 64, "So Loooooong");
+    window->win = mlx_new_window(window->mlx, window->width * 256, window->height * 256, "So Loooooong");
     return 0;
 }
 
@@ -15,6 +15,8 @@ int main(int ac, char **av)
         return (ft_printf("Error: number of arguments incorrect."));
     map_controller(&data, av);
     init_mlxwindow(&data);
+    graphics_cache_assets(&data);
+    graphics_render_tile(&data);
     mlx_loop(data.mlx);
 
     return 0;

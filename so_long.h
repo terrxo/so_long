@@ -25,5 +25,6 @@ typedef struct s_game
 int map_controller(t_game *map, char **av);
 int get_block(t_game *map, int x, int y);
 int graphics_cache_assets(t_game *cache);
+int graphics_render_tile(t_game*data);
 
 #endif
