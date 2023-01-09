@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:16 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/09 15:41:57 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/09 16:34:16 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_printf("Error: number of arguments incorrect."));
 	data.item_count = 0;
-	data.item_max = 0;
 	map_controller(&data, av);
 	init_mlxwindow(&data);
 	graphics_cache_assets(&data);
 	graphics_render_tile(&data);
+	mlx_key_hook(data.win, controls_controller, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }

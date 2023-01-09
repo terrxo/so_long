@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:23 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/09 15:39:29 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/09 16:30:21 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	graphics_render_tile(t_game *data)
 				mlx_put_image_to_window(data->mlx, data->win, data->wall, i
 						* 64, b * 64);
 			else if (block == '0')
-				mlx_put_image_to_window(data->mlx, data->floor, data->floor, i
+				mlx_put_image_to_window(data->mlx, data->win, data->floor, i
 						* 64, b * 64);
 			else if (block == 'C')
 			{
 				mlx_put_image_to_window(data->mlx, data->win, data->item, i
 						* 64, b * 64);
-				data->item_max++;
+				data->item_count++;
 			}
 			else if (block == 'E')
 				mlx_put_image_to_window(data->mlx, data->win, data->exit, i
