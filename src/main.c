@@ -3,7 +3,7 @@
 int init_mlxwindow(t_game *window)
 {
     window->mlx = mlx_init();
-    window->win = mlx_new_window(window->mlx, window->width * 256, window->height * 256, "So Loooooong");
+    window->win = mlx_new_window(window->mlx, window->width * 64, window->height * 64 + 64, "So Loooooong");
     return 0;
 }
 
