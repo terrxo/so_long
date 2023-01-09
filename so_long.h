@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:27 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/09 15:59:07 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/09 16:55:00 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ int			get_block(t_game *map, int x, int y);
 int			graphics_cache_assets(t_game *cache);
 int			graphics_render_tile(t_game *data);
 int			controls_controller(int key, t_game *data);
-
+int			swap_player_block(t_game *data, int x, int y);
 #endif
