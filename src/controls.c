@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:43:32 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/09 19:15:52 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/09 19:44:14 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,11 @@ int	controls_right(t_game *data)
 
 int	controls_controller(int key, t_game *data)
 {
-	int is_error;
-	//Exit game
+	int	is_error;
+
+	is_error = 0;
 	if (key == 53)
-		;
+		exit_game(data);
 	else if (key == 13)
 		is_error = controls_up(data);
 	else if (key == 1)
@@ -114,8 +115,7 @@ int	controls_controller(int key, t_game *data)
 	else if (key == 2)
 		is_error = controls_right(data);
 	if (is_error == 42)
-	{
-	}
+		exit_game(data);
 	ft_printf("Items left: %i\n", data->item_count);
 	return (0);
 }
