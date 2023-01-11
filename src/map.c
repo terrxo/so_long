@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:37 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/09 14:05:22 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/11 16:15:46 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	map_read(t_game *map, char *file)
 			break ;
 	}
 	map->map_raw_data = map_raw;
+	close(map->fd);
 	return (0);
 }
 

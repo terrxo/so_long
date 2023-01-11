@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:16 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/09 16:34:16 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/11 17:32:32 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,18 @@ int	main(int ac, char **av)
 {
 	t_game	data;
 
+	data.player_step_count = 0;
 	if (ac != 2)
 		return (ft_printf("Error: number of arguments incorrect."));
 	data.item_count = 0;
-	map_controller(&data, av);
+	if (map_controller(&data, av) != 0)
+		return (ft_printf("Error: structure of map is not valid"));
 	init_mlxwindow(&data);
 	graphics_cache_assets(&data);
 	graphics_render_tile(&data);
 	mlx_key_hook(data.win, controls_controller, &data);
 	mlx_loop(data.mlx);
+	exit_game(&data);
 	return (0);
 }
 

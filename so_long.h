@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:27 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/09 19:41:03 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/10 14:14:15 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_game
 	int		x_pos;
 	int		y_pos;
 	int		item_count;
+	int		player_step_count;
 }			t_game;
 
 int			map_controller(t_game *map, char **av);

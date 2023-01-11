@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:43:32 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/09 19:44:14 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/10 14:23:57 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	controls_up(t_game *data)
 		mlx_put_image_to_window(data->mlx, data->win, data->player, data->x_pos
 				* 64, (data->y_pos - 1) * 64);
 		swap_player_block(data, data->x_pos, data->y_pos - 1);
+		ft_printf("Steps taken: %i\n", ++data->player_step_count);
 	}
 	if (val == 'E' && is_win(data, val))
 		return (42);
@@ -46,6 +47,7 @@ int	controls_down(t_game *data)
 	val = get_block(data, data->x_pos, data->y_pos + 1);
 	if (val == '0' || val == 'C')
 	{
+		ft_printf("Steps taken: %i\n", ++data->player_step_count);
 		mlx_put_image_to_window(data->mlx, data->win, data->floor, data->x_pos
 				* 64, data->y_pos * 64);
 		mlx_put_image_to_window(data->mlx, data->win, data->player, data->x_pos
@@ -71,6 +73,7 @@ int	controls_left(t_game *data)
 		mlx_put_image_to_window(data->mlx, data->win, data->player, (data->x_pos
 					- 1) * 64, data->y_pos * 64);
 		swap_player_block(data, data->x_pos - 1, data->y_pos);
+		ft_printf("Steps taken: %i\n", ++data->player_step_count);
 	}
 	if (val == 'E' && is_win(data, val))
 		return (42);
@@ -91,6 +94,7 @@ int	controls_right(t_game *data)
 		mlx_put_image_to_window(data->mlx, data->win, data->player, (data->x_pos
 					+ 1) * 64, data->y_pos * 64);
 		swap_player_block(data, data->x_pos + 1, data->y_pos);
+		ft_printf("Steps taken: %i\n", ++data->player_step_count);
 	}
 	if (val == 'E' && is_win(data, val))
 		return (42);
@@ -116,6 +120,5 @@ int	controls_controller(int key, t_game *data)
 		is_error = controls_right(data);
 	if (is_error == 42)
 		exit_game(data);
-	ft_printf("Items left: %i\n", data->item_count);
 	return (0);
 }
