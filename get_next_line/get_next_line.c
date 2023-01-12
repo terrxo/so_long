@@ -1,41 +1,104 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 16:05:21 by ndivjak           #+#    #+#             */
+/*   Updated: 2023/01/12 14:54:20 by ndivjak          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
-#include <unistd.h>
 
-char *ft_read_to_left_str(int fd, char *left_str)
+char	*cache_fd(int fd, char *buffer)
 {
-	char *buff;
-	int rd_bytes;
+	char	*swap;
+	int		bytes_read;
 
-	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
+	bytes_read = 1;
+	swap = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!swap)
 		return (0);
-	rd_bytes = 1;
-	while (!ft_strchr(left_str, '\n') && rd_bytes != 0)
+	ft_bzero_t(swap, BUFFER_SIZE + 1);
+	while (ft_strchr_t(swap, '\n') == 0 && bytes_read > 0)
 	{
-		rd_bytes = read(fd, buff, BUFFER_SIZE);
-		if (rd_bytes == -1)
+		bytes_read = read(fd, swap, BUFFER_SIZE);
+		if (bytes_read == -1)
 		{
-			free(buff);
+			free(swap);
+			free(buffer);
 			return (0);
 		}
-		buff[rd_bytes] = '\0';
-		left_str = ft_strjoin(left_str, buff);
+		swap[bytes_read] = '\0';
+		buffer = ft_strjoin_t(buffer, swap);
 	}
-	free(buff);
-	return (left_str);
+	free(swap);
+	return (buffer);
 }
 
-char *get_next_line(int fd)
+char	*read_line(char *buffer)
 {
-	char *line;
-	static char *left_str;
+	int		i;
+	char	*out;
 
+	i = 0;
+	if (!buffer[0])
+		return (0);
+	while (buffer[i] != '\n' && buffer[i])
+		i++;
+	if (buffer[i] == '\n')
+		i++;
+	out = malloc(sizeof(char) * (i + 1));
+	if (!out)
+		return (0);
+	out[i] = '\0';
+	while (i--)
+		out[i] = buffer[i];
+	return (out);
+}
+
+char	*make_temp(char *buffer, int i)
+{
+	char			*temp;
+	unsigned int	x;
+
+	x = 0;
+	if (!buffer[i])
+	{
+		free(buffer);
+		return (0);
+	}
+	if (buffer[i] == '\n')
+		i++;
+	while (buffer[i + x])
+		x++;
+	temp = malloc(sizeof(char) * (x + 1));
+	if (!temp)
+		return (0);
+	temp[x] = '\0';
+	while (x--)
+		temp[x] = buffer[i + x];
+	free(buffer);
+	return (temp);
+}
+
+char	*get_next_line(int fd)
+{
+	static char		*buffer;
+	char			*line;
+	unsigned int	i;
+
+	i = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	left_str = ft_read_to_left_str(fd, left_str);
-	if (!left_str)
+	buffer = cache_fd(fd, buffer);
+	if (!buffer)
 		return (0);
-	line = ft_get_line(left_str);
-	left_str = ft_new_left_str(left_str);
+	line = read_line(buffer);
+	while (buffer[i] != '\n' && buffer[i])
+		i++;
+	buffer = make_temp(buffer, i);
 	return (line);
 }

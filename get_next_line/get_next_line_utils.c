@@ -1,56 +1,77 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/15 17:51:31 by ndivjak           #+#    #+#             */
+/*   Updated: 2023/01/12 14:54:35 by ndivjak          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
-#include "../ft_printf/libft/libft.h"
 
-char *ft_get_line(char *left_str)
+size_t	ft_strlen_t(const char *s)
 {
-	int i;
-	char *str;
+	unsigned int	i;
 
 	i = 0;
-	if (!left_str[i])
-		return (NULL);
-	while (left_str[i] && left_str[i] != '\n')
+	while (s[i])
 		i++;
-	str = (char *)malloc(sizeof(char) * (i + 2));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
-	{
-		str[i] = left_str[i];
-		i++;
-	}
-	if (left_str[i] == '\n')
-	{
-		str[i] = left_str[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	return (i);
 }
 
-char *ft_new_left_str(char *left_str)
+char	*ft_strjoin_t(char *s1, char *s2)
 {
-	int i;
-	int j;
-	char *str;
+	int		i;
+	int		j;
+	char	*temp;
 
-	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
-		i++;
-	if (!left_str[i])
-	{
-		free(left_str);
-		return (NULL);
-	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
-	if (!str)
-		return (NULL);
-	i++;
+	i = -1;
 	j = 0;
-	while (left_str[i])
-		str[j++] = left_str[i++];
-	str[j] = '\0';
-	free(left_str);
-	return (str);
+	if (!s1)
+	{
+		s1 = (char *)malloc(sizeof(char) * 1);
+		if (!s1 || !s2)
+			return (0);
+		s1[0] = '\0';
+	}
+	temp = (char *)malloc(sizeof(char) * (ft_strlen_t(s1) + ft_strlen_t(s2)
+				+ 1));
+	if (!temp)
+		return (0);
+	while (s1[++i])
+		temp[i] = s1[i];
+	while (s2[j])
+		temp[i++] = s2[j++];
+	temp[i] = '\0';
+	free(s1);
+	return (temp);
+}
+
+int	ft_strchr_t(const char *s, char c)
+{
+	if (!s)
+		return (1);
+	while (*s)
+	{
+		if (*s == c)
+			return (1);
+		s++;
+	}
+	return (0);
+}
+
+void	ft_bzero_t(void *s, size_t n)
+{
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)s;
+	while (n > 0)
+	{
+		*ptr = 0;
+		ptr++;
+		n--;
+	}
 }
