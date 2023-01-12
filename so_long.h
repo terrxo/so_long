@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:27 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/10 14:14:15 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/12 18:03:50 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "./ft_printf/ft_printf.h"
 # include "./ft_printf/libft/libft.h"
-# include "./get_next_line/get_next_line.h"
 # include "./mlx/mlx.h"
 # include <fcntl.h>
 
