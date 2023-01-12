@@ -6,31 +6,49 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:37 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/11 16:15:46 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/12 16:18:16 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+int	get_file_length(int fd)
+{
+	int		i;
+	char	*buf;
+	int		count;
+
+	i = 1;
+	count = 0;
+	buf = malloc(sizeof(char) * (100));
+	if (!buf)
+		return (-1);
+	while (i > 0)
+	{
+		i = read(fd, buf, 100);
+		count += i;
+	}
+	free(buf);
+	return (count);
+}
+
 int	map_read(t_game *map, char *file)
 {
 	char	*map_raw;
-	char	*read_line;
+	int		i;
 
+	i = 0;
 	if ((map->fd = open(file, O_RDONLY)) < 0)
 		return (1);
-	map_raw = malloc(sizeof(char) * 1001);
-	while (1)
-	{
-		// read_line = get_next_line(map->fd);
-		// if (!read_line)
-		//     break ;
-		// map_raw = ft_strjoin(map_raw, read_line);
-		if (read(map->fd, map_raw, 1000) == 0)
-			break ;
-	}
-	map->map_raw_data = map_raw;
+	i = get_file_length(map->fd);
 	close(map->fd);
+	if ((map->fd = open(file, O_RDONLY)) < 0)
+		return (1);
+	map_raw = ft_calloc(i + 1, 1);
+	read(map->fd, map_raw, i);
+	map_raw[i] = '\0';
+	close(map->fd);
+	map->map_raw_data = map_raw;
 	return (0);
 }
 
@@ -80,4 +98,5 @@ int	map_controller(t_game *map, char **av)
 		return (1);
 	if (map_parse(map) != 0)
 		return (1);
+	return (0);
 }

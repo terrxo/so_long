@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:16 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/11 17:32:32 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/12 16:50:44 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	init_mlxwindow(t_game *window)
 {
 	window->mlx = mlx_init();
 	window->win = mlx_new_window(window->mlx, window->width * 64, window->height
-			* 64 + 64, "So Loooooong");
+			* 64, "So Loooooong");
 	return (0);
 }
 
@@ -34,8 +34,8 @@ int	main(int ac, char **av)
 	graphics_cache_assets(&data);
 	graphics_render_tile(&data);
 	mlx_key_hook(data.win, controls_controller, &data);
+	mlx_hook(data.win, 17, 0, data.exit, 0);
 	mlx_loop(data.mlx);
-	exit_game(&data);
 	return (0);
 }
 

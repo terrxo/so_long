@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:43:32 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/10 14:23:57 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/12 16:31:59 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_win(t_game *data, int val)
 {
-	if (data->item_count == 0)
+	if (data->item_count == 0 && val == 'E')
 		return (1);
 	return (0);
 }
