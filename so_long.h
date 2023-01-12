@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:27 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/12 18:03:50 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/12 20:46:47 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_game
 	void	*win;
 	int		fd;
 	char	*map_raw_data;
+	char	*map_virus;
 	int		height;
 	int		width;
 	void	*floor;
@@ -33,6 +34,7 @@ typedef struct s_game
 	void	*item;
 	int		x_pos;
 	int		y_pos;
+	int		p_index;
 	int		item_count;
 	int		player_step_count;
 }			t_game;
@@ -44,4 +46,7 @@ int			graphics_render_tile(t_game *data);
 int			controls_controller(int key, t_game *data);
 int			swap_player_block(t_game *data, int x, int y);
 int			exit_game(t_game *data);
+int			map_check_controller(t_game *map);
+int			virus_controller(t_game *data);
+
 #endif

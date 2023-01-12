@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:37 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/12 16:18:16 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/12 20:02:31 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,10 @@ int	map_controller(t_game *map, char **av)
 		return (1);
 	if (map_parse(map) != 0)
 		return (1);
+	if (map_check_controller(map) != 0)
+	{
+		free(map->map_raw_data);
+		return (1);
+	}
 	return (0);
 }
