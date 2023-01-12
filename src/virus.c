@@ -5,23 +5,30 @@ int	check_and_infect_block(t_game *data, int x, int y)
 	char	c;
 	int		player_pos;
 
-	c = get_block(data, x, y);
-	if (c == '1' || c == '2')
-		return (1);
 	player_pos = (y * (data->width + 1) + x + 1) - 1;
-	data->map_virus[player_pos] = '2';
+	c = data->map_virus[player_pos];
+	if (c == '1' || c == 'P')
+		return (1);
+	data->map_virus[player_pos] = 'P';
 	return (0);
 }
 
 int	virus_spread(t_game *data, int x, int y)
 {
+	int left, right, down, up;
 	ft_printf("%s\n\n", data->map_virus);
-	if (check_and_infect_block(data, x, y) == 1)
-		return (0);
-	virus_spread(data, x + 1, y);
-	virus_spread(data, x, y + 1);
-	virus_spread(data, x - 1, y);
-	virus_spread(data, x, y - 1);
+	left = check_and_infect_block(data, x - 1, y);
+	right == check_and_infect_block(data, x + 1, y);
+	up == check_and_infect_block(data, x, y - 1);
+	down == check_and_infect_block(data, x, y + 1);
+	if (right == 0)
+		virus_spread(data, x + 1, y);
+	if (left == 0)
+		virus_spread(data, x - 1, y);
+	if (down == 0)
+		virus_spread(data, x, y + 1);
+	if (up == 0)
+		virus_spread(data, x, y - 1);
 	return (0);
 }
 
