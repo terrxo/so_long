@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:16 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/12 16:50:44 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/12 17:23:56 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int ac, char **av)
 	mlx_key_hook(data.win, controls_controller, &data);
 	mlx_hook(data.win, 17, 0, data.exit, 0);
 	mlx_loop(data.mlx);
+	exit_game(&data);
 	return (0);
 }
 
