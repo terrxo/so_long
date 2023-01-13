@@ -13,6 +13,26 @@ int	check_and_infect_block(t_game *data, int x, int y)
 	return (0);
 }
 
+int	virus_check(t_game *map)
+{
+	int	valid;
+	int	i;
+
+	valid = 0;
+	i = 0;
+	while (map->map_virus[i])
+	{
+		if (map->map_virus[i] == 'E')
+			valid++;
+		else if (map->map_virus[i] == 'C')
+			valid++;
+		i++;
+	}
+	if (valid != 0)
+		return (1);
+	return (0);
+}
+
 int	virus_spread(t_game *data, int x, int y)
 {
 	int left, right, down, up;
@@ -34,8 +54,9 @@ int	virus_spread(t_game *data, int x, int y)
 
 int	virus_controller(t_game *data)
 {
-	if (virus_spread(data, data->x_pos, data->y_pos) != 0)
-		return (0);
+	if (virus_spread(data, data->x_pos, data->y_pos) != 0
+		|| virus_check(data) != 0)
+		return (1);
 	ft_printf("Map:\n%s", data->map_virus);
 	return (0);
 }
