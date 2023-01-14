@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:37 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/12 20:02:31 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/14 02:30:50 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ int	map_read(t_game *map, char *file)
 	int		i;
 
 	i = 0;
-	if ((map->fd = open(file, O_RDONLY)) < 0)
+	map->fd = open(file, O_RDONLY);
+	if (map->fd < 0)
 		return (1);
 	i = get_file_length(map->fd);
 	close(map->fd);
-	if ((map->fd = open(file, O_RDONLY)) < 0)
+	map->fd = open(file, O_RDONLY);
+	if (map->fd < 0)
 		return (1);
 	map_raw = ft_calloc(i + 1, 1);
 	read(map->fd, map_raw, i);
@@ -54,41 +56,30 @@ int	map_read(t_game *map, char *file)
 
 int	map_get_size(t_game *map)
 {
-	char	*map_raw;
-	int		i;
-	int		x;
-	int		x_high;
-	int		y;
+	int	i;
+	int	x;
+	int	y;
 
-	map_raw = map->map_raw_data;
-	i = 0;
+	i = -1;
 	x = 0;
-	x_high = 0;
+	map->norminette_bullshit = 0;
 	y = 0;
-	while (map_raw[i])
+	while (map->map_raw_data[++i])
 	{
-		if (map_raw[i] == '\n')
+		if (map->map_raw_data[i] == '\n')
 		{
-			if (x > x_high)
-				x_high = x;
+			if (x > map->norminette_bullshit)
+				map->norminette_bullshit = x;
 			y++;
 			x = 0;
 		}
-		else if (map_raw[i] == '1' || map_raw[i] == '0' || map_raw[i] == 'P'
-				|| map_raw[i] == 'C' || map_raw[i] == 'E')
+		else if (ft_strchr("10PCE", map->map_raw_data[i]))
 			x++;
 		else
 			return (1);
-		i++;
 	}
 	map->height = y;
-	map->width = x_high;
-	return (0);
-}
-
-int	map_parse(t_game *map)
-{
-	map_get_size(map);
+	map->width = map->norminette_bullshit;
 	return (0);
 }
 
@@ -96,7 +87,7 @@ int	map_controller(t_game *map, char **av)
 {
 	if (map_read(map, av[1]) != 0)
 		return (1);
-	if (map_parse(map) != 0)
+	if (map_get_size(map) != 0)
 		return (1);
 	if (map_check_controller(map) != 0)
 	{

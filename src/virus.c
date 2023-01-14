@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   virus.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/14 01:53:03 by ndivjak           #+#    #+#             */
+/*   Updated: 2023/01/14 02:32:25 by ndivjak          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 int	check_and_infect_block(t_game *data, int x, int y)
@@ -35,8 +47,11 @@ int	virus_check(t_game *map)
 
 int	virus_spread(t_game *data, int x, int y)
 {
-	int left, right, down, up;
-	ft_printf("%s\n\n", data->map_virus);
+	int	left;
+	int	right;
+	int	down;
+	int	up;
+
 	left = check_and_infect_block(data, x - 1, y);
 	right = check_and_infect_block(data, x + 1, y);
 	up = check_and_infect_block(data, x, y - 1);
@@ -57,6 +72,5 @@ int	virus_controller(t_game *data)
 	if (virus_spread(data, data->x_pos, data->y_pos) != 0
 		|| virus_check(data) != 0)
 		return (1);
-	ft_printf("Map:\n%s", data->map_virus);
 	return (0);
 }

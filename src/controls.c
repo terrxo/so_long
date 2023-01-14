@@ -6,18 +6,11 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:43:32 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/12 16:31:59 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/14 02:33:09 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-int	is_win(t_game *data, int val)
-{
-	if (data->item_count == 0 && val == 'E')
-		return (1);
-	return (0);
-}
 
 int	controls_up(t_game *data)
 {
@@ -27,9 +20,9 @@ int	controls_up(t_game *data)
 	if (val == '0' || val == 'C')
 	{
 		mlx_put_image_to_window(data->mlx, data->win, data->floor, data->x_pos
-				* 64, data->y_pos * 64);
+			* 64, data->y_pos * 64);
 		mlx_put_image_to_window(data->mlx, data->win, data->player, data->x_pos
-				* 64, (data->y_pos - 1) * 64);
+			* 64, (data->y_pos - 1) * 64);
 		swap_player_block(data, data->x_pos, data->y_pos - 1);
 		ft_printf("Steps taken: %i\n", ++data->player_step_count);
 	}
@@ -49,9 +42,9 @@ int	controls_down(t_game *data)
 	{
 		ft_printf("Steps taken: %i\n", ++data->player_step_count);
 		mlx_put_image_to_window(data->mlx, data->win, data->floor, data->x_pos
-				* 64, data->y_pos * 64);
+			* 64, data->y_pos * 64);
 		mlx_put_image_to_window(data->mlx, data->win, data->player, data->x_pos
-				* 64, (data->y_pos + 1) * 64);
+			* 64, (data->y_pos + 1) * 64);
 		swap_player_block(data, data->x_pos, data->y_pos + 1);
 	}
 	if (val == 'E' && is_win(data, val))
@@ -69,9 +62,9 @@ int	controls_left(t_game *data)
 	if (val == '0' || val == 'C')
 	{
 		mlx_put_image_to_window(data->mlx, data->win, data->floor, data->x_pos
-				* 64, data->y_pos * 64);
+			* 64, data->y_pos * 64);
 		mlx_put_image_to_window(data->mlx, data->win, data->player, (data->x_pos
-					- 1) * 64, data->y_pos * 64);
+				- 1) * 64, data->y_pos * 64);
 		swap_player_block(data, data->x_pos - 1, data->y_pos);
 		ft_printf("Steps taken: %i\n", ++data->player_step_count);
 	}
@@ -90,9 +83,9 @@ int	controls_right(t_game *data)
 	if (val == '0' || val == 'C')
 	{
 		mlx_put_image_to_window(data->mlx, data->win, data->floor, data->x_pos
-				* 64, data->y_pos * 64);
+			* 64, data->y_pos * 64);
 		mlx_put_image_to_window(data->mlx, data->win, data->player, (data->x_pos
-					+ 1) * 64, data->y_pos * 64);
+				+ 1) * 64, data->y_pos * 64);
 		swap_player_block(data, data->x_pos + 1, data->y_pos);
 		ft_printf("Steps taken: %i\n", ++data->player_step_count);
 	}

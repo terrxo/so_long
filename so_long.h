@@ -6,7 +6,7 @@
 /*   By: ndivjak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:27 by ndivjak           #+#    #+#             */
-/*   Updated: 2023/01/12 20:46:47 by ndivjak          ###   ########.fr       */
+/*   Updated: 2023/01/14 02:33:38 by ndivjak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_game
 	int		p_index;
 	int		item_count;
 	int		player_step_count;
+	int		norminette_bullshit;
 }			t_game;
 
 int			map_controller(t_game *map, char **av);
@@ -48,5 +49,6 @@ int			swap_player_block(t_game *data, int x, int y);
 int			exit_game(t_game *data);
 int			map_check_controller(t_game *map);
 int			virus_controller(t_game *data);
+int			is_win(t_game *data, int val);
 
 #endif
