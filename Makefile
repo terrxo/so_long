@@ -1,12 +1,12 @@
 CC = cc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -Werror
 SRC = ./src/*.c
 OBJ = ./obj/*.o
 
 all:
 			$(MAKE) all -C ./ft_printf
 			cd ./obj/ ; $(CC) $(CFLAGS) -Imlx -c ../$(SRC)
-			$(CC) $(CFLAGS) $(OBJ) ./ft_printf/libftprintf.a ./mlx/libmlx.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o program.out -g
+			$(CC) $(CFLAGS) $(OBJ) ./ft_printf/libftprintf.a ./mlx/libmlx.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o program.out
 			
 clean:	
 			$(MAKE) clean -C ./ft_printf
